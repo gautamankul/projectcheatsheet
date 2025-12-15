@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YIL Sensor Health Intelligence (YIL-SHI)</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        
+        h1 {
+            color: #ff6b6b;
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 2.5em;
+            border-bottom: 3px solid #ff6b6b;
+            padding-bottom: 15px;
+        }
+        
+        .subtitle {
+            text-align: center;
+            color: #666;
+            font-size: 1.2em;
+            margin-bottom: 30px;
+            font-style: italic;
+        }
+        
+        h2 {
+            color: #ff6b6b;
+            margin-top: 35px;
+            margin-bottom: 20px;
+            font-size: 1.8em;
+            border-left: 5px solid #ff6b6b;
+            padding-left: 15px;
+        }
+        
+        h3 {
+            color: #e74c3c;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            font-size: 1.3em;
+        }
+        
+        h4 {
+            color: #c0392b;
+            margin-top: 15px;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+        
+        .intro-box {
+            background: #fff5f5;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border-left: 4px solid #ff6b6b;
+        }
+        
+        .why-box {
+            background: #e8f5e9;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border-left: 4px solid #4caf50;
+        }
+        
+        .why-box h3 {
+            color: #2e7d32;
+            margin-top: 0;
+        }
+        
+        .objective-box {
+            background: #e3f2fd;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border-left: 4px solid #2196f3;
+        }
+        
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .tech-item {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            font-weight: bold;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        .section-box {
+            background: #f5f5f5;
+            padding: 25px;
+            margin: 20px 0;
+            border-radius: 10px;
+            border-left: 5px solid #ff6b6b;
+        }
+        
+        .section-number {
+            background: #ff6b6b;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            display: inline-block;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        
+        .tip-box {
+            background: #fff9e6;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            border-left: 4px solid #ffc107;
+        }
+        
+        .tip-box strong {
+            color: #f57c00;
+        }
+        
+        .interview-question {
+            background: #e8eaf6;
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 10px;
+            border-left: 5px solid #5c6bc0;
+        }
+        
+        .interview-question h4 {
+            color: #3f51b5;
+            margin-top: 0;
+        }
+        
+        .features-list {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 15px 0;
+            border: 2px solid #ff6b6b;
+        }
+        
+        .features-list h4 {
+            color: #ff6b6b;
+            margin-top: 0;
+        }
+        
+        ul {
+            margin-left: 30px;
+            margin-top: 10px;
+        }
+        
+        ul li {
+            margin: 8px 0;
+            color: #444;
+        }
+        
+        ol {
+            margin-left: 30px;
+            margin-top: 10px;
+        }
+        
+        ol li {
+            margin: 10px 0;
+            color: #444;
+        }
+        
+        .model-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .model-card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            border: 2px solid #e74c3c;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        .model-card h4 {
+            color: #e74c3c;
+            margin-top: 0;
+        }
+        
+        .deployment-options {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .deployment-card {
+            background: #f0f4c3;
+            padding: 20px;
+            border-radius: 10px;
+            border: 2px solid #9e9d24;
+        }
+        
+        .deployment-card h4 {
+            color: #827717;
+            margin-top: 0;
+        }
+        
+        .important-note {
+            background: #ffebee;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            border-left: 4px solid #f44336;
+            font-weight: bold;
+        }
+        
+        pre {
+            background: #2d2d2d;
+            border-radius: 10px;
+            margin: 20px 0;
+            overflow-x: auto;
+        }
+        
+        code {
+            color: #f8f8f2;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            display: block;
+            padding: 20px;
+            line-height: 1.5;
+        }
+        
+        .architecture-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            margin: 30px 0;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        
+        .architecture-box h2 {
+            color: white;
+            border: none;
+            padding: 0;
+            margin-bottom: 20px;
+        }
+        
+        .key-points-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .key-point-card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            border-top: 5px solid #ff6b6b;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        .key-point-card h4 {
+            color: #ff6b6b;
+            margin-top: 0;
+        }
+        
+        .highlight {
+            background: #d1f2eb;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            border-left: 4px solid #28a745;
+        }
+        
+        strong {
+            color: #333;
+        }
+        
+        .emoji {
+            font-size: 1.2em;
+            margin-right: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔧 YIL Sensor Health Intelligence (YIL-SHI)</h1>
+        <div class="subtitle">Predictive Maintenance for Industrial Sensors & Equipment</div>
+        
+        <div class="intro-box">
+            <p>Yokogawa works heavily with <strong>process automation, sensors, control systems, and data acquisition</strong>. Predictive maintenance is a perfect fit because:</p>
+            <ul>
+                <li>It uses <strong>timeseries sensor data</strong> (very common in Yokogawa's DCS/SCADA systems such as CENTUM, Stardom, PRM, etc.).</li>
+                <li>It solves a <strong>real industrial problem</strong>.</li>
+                <li>It is simple enough to implement using synthetic or open datasets.</li>
+                <li>Interviewers will ask about <strong>ML workflow</strong>, and this project touches data preprocessing, feature engineering, modeling, evaluation, deployment, etc.</li>
+            </ul>
+        </div>
+        
+        <div class="why-box">
+            <h3><span class="emoji">💡</span>Why this project?</h3>
+            <p>Build an ML model that predicts whether a sensor or equipment (e.g., pump, compressor, valve) will <strong>fail in the near future</strong> using historical sensor data (temperature, pressure, vibration, flow rate).</p>
+            <p style="margin-top: 10px;">You can use open datasets like <strong>NASA Turbofan Engine Degradation Dataset</strong> OR create synthetic data.</p>
+        </div>
+        
+        <div class="objective-box">
+            <h3><span class="emoji">🎯</span>Project Summary</h3>
+            <p>Build an ML model that predicts whether a sensor or equipment will fail in the near future using historical sensor data, enabling proactive maintenance scheduling and downtime prevention.</p>
+        </div>
+        
+        <h2><span class="emoji">🛠️</span>Tech Stack</h2>
+        <div class="tech-grid">
+            <div class="tech-item">Python</div>
+            <div class="tech-item">Pandas, NumPy</div>
+            <div class="tech-item">Scikit-learn</div>
+            <div class="tech-item">Matplotlib/Seaborn</div>
+            <div class="tech-item">TensorFlow/PyTorch</div>
+            <div class="tech-item">FastAPI / Streamlit</div>
+        </div>
+        
+        <h2><span class="emoji">📊</span>ML Approach</h2>
+        
+        <div class="section-box">
+            <div class="section-number">Step 1</div>
+            <h3>Data Collection</h3>
+            <p>Simulate or use real industrial-like sensor data:</p>
+            
+            <div class="features-list">
+                <h4>Sensor Features:</h4>
+                <ul>
+                    <li><strong>Temperature</strong></li>
+                    <li><strong>Vibration</strong></li>
+                    <li><strong>Pressure</strong></li>
+                    <li><strong>Flow rate</strong></li>
+                    <li><strong>Motor current</strong></li>
+                    <li><strong>Run-time hours</strong></li>
+                    <li><strong>Failure label</strong> (0 = normal, 1 = failure)</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="section-box">
+            <div class="section-number">Step 2</div>
+            <h3>Feature Engineering</h3>
+            <p>Some smart engineered features:</p>
+            <ul>
+                <li><strong>Rolling mean</strong> (5/10-minute window)</li>
+                <li><strong>Rolling standard deviation</strong></li>
+                <li><strong>Change rate</strong> (Δ sensor value)</li>
+                <li><strong>Vibration FFT features</strong> (optional)</li>
+                <li><strong>Health index score</strong></li>
+            </ul>
+            
+            <div class="tip-box">
+                <strong>👉 Interview Tip:</strong> Highlight that industrial data is noisy and often requires smoothing, interpolation, and handling missing values.
+            </div>
+        </div>
+        
+        <div class="section-box">
+            <div class="section-number">Step 3</div>
+            <h3>Model Building</h3>
+            
+            <div class="model-grid">
+                <div class="model-card">
+                    <h4>Basic Models</h4>
+                    <ul>
+                        <li>Logistic Regression</li>
+                        <li>RandomForest</li>
+                        <li>Gradient Boosting</li>
+                        <li>XGBoost/LightGBM</li>
+                    </ul>
+                </div>
+                
+                <div class="model-card">
+                    <h4>Advanced (Optional)</h4>
+                    <ul>
+                        <li>LSTM / GRU for timeseries</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="tip-box">
+                <strong>👉 Interview Tip:</strong> Explain why tree-based models work well with tabular industrial data.
+            </div>
+        </div>
+        
+        <div class="section-box">
+            <div class="section-number">Step 4</div>
+            <h3>Model Evaluation</h3>
+            <p><strong>Use:</strong></p>
+            <ul>
+                <li>Precision, Recall</li>
+                <li>F1 Score</li>
+                <li>ROC-AUC</li>
+                <li>Confusion Matrix</li>
+            </ul>
+            
+            <div class="important-note">
+                <span class="emoji">⚠️</span> Important in industry: <strong>False negatives are more costly</strong> (failing to detect an upcoming failure).
+            </div>
+        </div>
+        
+        <div class="section-box">
+            <div class="section-number">Step 5</div>
+            <h3>Deployment (Optional but impressive)</h3>
+            <p>Deploy using:</p>
+            
+            <div class="deployment-options">
+                <div class="deployment-card">
+                    <h4>Option 1: FastAPI Endpoint</h4>
+                    <p>Takes live sensor readings and returns:</p>
+                    <ul>
+                        <li>Health score</li>
+                        <li>Probability of failure</li>
+                    </ul>
+                </div>
+                
+                <div class="deployment-card">
+                    <h4>Option 2: Streamlit Dashboard</h4>
+                    <p>Showing:</p>
+                    <ul>
+                        <li>Real-time sensor trends</li>
+                        <li>Predictions</li>
+                        <li>Alerts (Red/Yellow/Green)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <h2><span class="emoji">❓</span>Common Interview Questions</h2>
+        
+        <div class="interview-question">
+            <h4>1. How did you preprocess timeseries data?</h4>
+            <ul>
+                <li>Interpolated missing data</li>
+                <li>Normalized sensor values</li>
+                <li>Created rolling window features</li>
+                <li>Removed sensor drift and outliers</li>
+            </ul>
+        </div>
+        
+        <div class="interview-question">
+            <h4>2. Which model performed best and why?</h4>
+            <p>Tree-based models like <strong>RandomForest/XGBoost</strong> performed well because industrial sensor data is tabular and has nonlinear relationships. <strong>LSTMs</strong> improved performance slightly but required more data and compute.</p>
+        </div>
+        
+        <div class="interview-question">
+            <h4>3. How would this work in a real Yokogawa system?</h4>
+            <ul>
+                <li>ML model can be deployed at the <strong>edge or cloud</strong>.</li>
+                <li>It would receive sensor inputs from <strong>Yokogawa's DCS/SCADA/IIoT systems</strong>.</li>
+                <li>When the model predicts high failure probability, it triggers alerts through <strong>Yokogawa's Alarm Management system</strong>.</li>
+            </ul>
+        </div>
+        
+        <div class="interview-question">
+            <h4>4. How do you handle class imbalance?</h4>
+            <ul>
+                <li><strong>SMOTE</strong></li>
+                <li><strong>Class-weighted loss</strong></li>
+                <li><strong>Threshold tuning</strong></li>
+            </ul>
+        </div>
+        
+        <h2><span class="emoji">🎓</span>Key Talking Points for Interview</h2>
+        
+        <div class="key-points-grid">
+            <div class="key-point-card">
+                <h4>1. Problem Framing</h4>
+                <ul>
+                    <li><strong>Objective:</strong> Predict failures ahead of time (e.g., within next 10 timesteps) to schedule maintenance and avoid downtime.</li>
+                    <li><strong>Metric:</strong> Prefer recall / F1 for failure class; use ROC-AUC for overall ability.</li>
+                </ul>
+            </div>
+            
+            <div class="key-point-card">
+                <h4>2. Data Preprocessing</h4>
+                <ul>
+                    <li>Handle missing data with interpolation</li>
+                    <li>Clip and remove obvious sensor spikes</li>
+                    <li>Apply rolling windows to capture trends</li>
+                    <li>Create features: rolling mean/std, deltas, health indices, FFT energy if vibration data available</li>
+                </ul>
+            </div>
+            
+            <div class="key-point-card">
+                <h4>3. Modeling Choices</h4>
+                <ul>
+                    <li><strong>Baseline:</strong> RandomForest or XGBoost (tabular, robust to noise)</li>
+                    <li><strong>Sequence models:</strong> LSTM/GRU if long temporal dependencies exist</li>
+                    <li><strong>Class imbalance:</strong> class weights, SMOTE, threshold tuning</li>
+                </ul>
+            </div>
+            
+            <div class="key-point-card">
+                <h4>4. Evaluation & Costs</h4>
+                <ul>
+                    <li><strong>False Negative cost >> False Positive</strong> in safety-critical equipment</li>
+                    <li>Use confusion matrix and precision-recall curves for threshold selection</li>
+                </ul>
+            </div>
+            
+            <div class="key-point-card">
+                <h4>5. Deployment</h4>
+                <ul>
+                    <li><strong>Edge inference</strong> for low-latency alerts or <strong>cloud</strong> for heavy retraining</li>
+                    <li><strong>Integration:</strong> Yokogawa DCS via OPC-UA, MQTT, or historian export</li>
+                    <li>Alerts can feed into Yokogawa alarm management or external CMMS</li>
+                </ul>
+            </div>
+            
+            <div class="key-point-card">
+                <h4>6. Scalability & Reliability</h4>
+                <ul>
+                    <li>Use rolling retraining & A/B shadow deployment</li>
+                    <li>Monitor data drift and model performance</li>
+                    <li>Maintain feature parity between training and inference</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="architecture-box">
+            <h2><span class="emoji">🏗️</span>Architecture</h2>
+            <p style="font-size: 1.1em;">Sensor Data → Preprocessing → Feature Engineering → ML Model → Predictions → Alert System</p>
+        </div>
+        
+        <h2><span class="emoji">💻</span>Code Implementation</h2>
+        
+        <pre><code>import numpy as np
+import pandas as pd
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import classification_report, confusion_matrix, roc_auc_score
+from sklearn.preprocessing import StandardScaler
+import joblib</code></pre>
+        
+        <div class="highlight">
+            <p><strong>🎯 Project Goal:</strong> This project demonstrates your ability to:</p>
+            <ul>
+                <li>Work with real-world industrial timeseries data</li>
+                <li>Apply feature engineering techniques for sensor data</li>
+                <li>Build and evaluate predictive models</li>
+                <li>Understand the business context and cost implications</li>
+                <li>Deploy ML solutions in production environments</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

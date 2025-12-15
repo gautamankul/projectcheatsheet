@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demand Forecast Q&A</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 40px 20px;
+            line-height: 1.6;
+            color: #333;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+        
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+        
+        .subtitle {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+        
+        .content {
+            padding: 40px;
+        }
+        
+        .qa-item {
+            margin-bottom: 40px;
+            padding: 30px;
+            background: #f8f9fa;
+            border-radius: 12px;
+            border-left: 5px solid #667eea;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        
+        .qa-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.2);
+        }
+        
+        .question {
+            font-size: 1.3em;
+            font-weight: 600;
+            color: #667eea;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: flex-start;
+        }
+        
+        .q-number {
+            background: #667eea;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 6px;
+            margin-right: 12px;
+            font-size: 0.9em;
+            flex-shrink: 0;
+        }
+        
+        .answer {
+            color: #495057;
+            line-height: 1.8;
+            font-size: 1.05em;
+        }
+        
+        .answer p {
+            margin-bottom: 15px;
+        }
+        
+        .highlight {
+            background: #fff3cd;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-weight: 500;
+        }
+        
+        .metric {
+            color: #28a745;
+            font-weight: 600;
+        }
+        
+        pre {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 15px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 0.95em;
+            line-height: 1.5;
+        }
+        
+        code {
+            font-family: 'Courier New', monospace;
+        }
+        
+        .feature-list {
+            margin: 15px 0;
+            padding-left: 20px;
+        }
+        
+        .feature-list li {
+            margin: 8px 0;
+            color: #495057;
+        }
+        
+        .formula {
+            background: #e7f3ff;
+            border: 2px solid #90c9ff;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            text-align: center;
+            font-family: 'Georgia', serif;
+            font-size: 1.1em;
+            color: #004085;
+        }
+        
+        .tag {
+            display: inline-block;
+            background: #764ba2;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            margin: 5px 5px 5px 0;
+        }
+        
+        footer {
+            background: #f8f9fa;
+            padding: 20px;
+            text-align: center;
+            color: #6c757d;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📊 Demand Forecast Q&A</h1>
+            <p class="subtitle">Machine Learning Approach to Sales Forecasting</p>
+        </header>
+        
+        <div class="content">
+            <div class="qa-item">
+                <div class="question">
+                    <span class="q-number">Q1</span>
+                    <span>Why did you choose Gradient Boosting over ARIMA/Prophet?</span>
+                </div>
+                <div class="answer">
+                    <p>While ARIMA and Prophet are excellent for univariate time-series, I chose <span class="highlight">Gradient Boosting</span> (e.g., XGBoost or LightGBM) because this project required handling <strong>multiple external variables</strong> like price changes and promotions.</p>
+                    <p>Gradient Boosting models are <strong>non-linear</strong> and more robust at capturing complex interactions between these features compared to the linear assumptions of ARIMA.</p>
+                    <div>
+                        <span class="tag">XGBoost</span>
+                        <span class="tag">LightGBM</span>
+                        <span class="tag">Non-linear</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="qa-item">
+                <div class="question">
+                    <span class="q-number">Q2</span>
+                    <span>What specific features did you incorporate to improve accuracy?</span>
+                </div>
+                <div class="answer">
+                    <p>I engineered several features to achieve the <span class="metric">20% accuracy improvement</span>:</p>
+                    <ul class="feature-list">
+                        <li><strong>Lag Features:</strong> Previous sales at <em>t−1</em>, <em>t−7</em>, and <em>t−30</em> days</li>
+                        <li><strong>Rolling Statistics:</strong> Moving averages and standard deviations to capture trends</li>
+                        <li><strong>Temporal Data:</strong> Indicators for weekends, holidays, and month-end spikes</li>
+                    </ul>
+                    <div class="formula">
+                        Sales<sub>t</sub> = f(Sales<sub>t−1</sub>, Sales<sub>t−7</sub>, Sales<sub>t−30</sub>, Moving Avg, Temporal Features)
+                    </div>
+                </div>
+            </div>
+            
+            <div class="qa-item">
+                <div class="question">
+                    <span class="q-number">Q3</span>
+                    <span>How did you validate the model for production?</span>
+                </div>
+                <div class="answer">
+                    <p>I used <span class="highlight">Time-Series Cross-Validation</span> (walk-forward validation) to ensure the model didn't 'leak' future information into the past.</p>
+                    <p>The primary metric was <strong>MAPE</strong> (Mean Absolute Percentage Error), as it was easily interpretable for business stakeholders when discussing the <span class="metric">75% improvement</span> in overall forecast accuracy.</p>
+                    <div class="formula">
+                        MAPE = (1/n) × Σ |Actual − Forecast| / |Actual| × 100%
+                    </div>
+                    <div>
+                        <span class="tag">Walk-Forward Validation</span>
+                        <span class="tag">MAPE</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="qa-item">
+                <div class="question">
+                    <span class="q-number">Q4</span>
+                    <span>What feature engineering techniques did you use?</span>
+                </div>
+                <div class="answer">
+                    <p>"Since seasonality was a major factor, I created <strong>time-based features</strong> like day-of-week, month, and 'is_holiday' flags. Crucially, I engineered <strong>lag features</strong> (e.g., sales 7 days ago, sales 30 days ago) and <strong>rolling window statistics</strong> (e.g., moving average of the last 7 days) to capture trends. These lag features were the strongest predictors in the model."</p>
+<pre><code># Example Feature Engineering
+df['sales_lag_7'] = df['sales'].shift(7)
+df['sales_lag_30'] = df['sales'].shift(30)
+df['rolling_mean_7'] = df['sales'].rolling(window=7).mean()
+df['is_weekend'] = df['day_of_week'].isin([5, 6]).astype(int)
+df['is_holiday'] = df['date'].isin(holiday_dates).astype(int)</code></pre>
+                </div>
+            </div>
+            
+            <div class="qa-item">
+                <div class="question">
+                    <span class="q-number">Q5</span>
+                    <span>How did you handle missing values or 'Cold Start' problems?</span>
+                </div>
+                <div class="answer">
+                    <p><strong>Missing Values:</strong> For minor gaps in historical sales, I used <span class="highlight">linear interpolation</span>.</p>
+                    <p><strong>Cold Start Products:</strong> For new items with no history, I used a <span class="highlight">clustering approach</span>: I assigned the new product to an existing product category based on meta-features (price, type) and used the category's average sales curve as a proxy until sufficient actual data was generated.</p>
+<pre><code># Handling Missing Values
+df['sales'].interpolate(method='linear', inplace=True)
+
+# Cold Start - Clustering Approach
+new_product_cluster = assign_cluster(new_product_features)
+proxy_sales = category_avg_sales[new_product_cluster]</code></pre>
+                </div>
+            </div>
+            
+            <div class="qa-item">
+                <div class="question">
+                    <span class="q-number">Q6</span>
+                    <span>Which metric did you use to define 'accuracy' and why?</span>
+                </div>
+                <div class="answer">
+                    <p>"I primarily optimized for <strong>RMSE</strong> (Root Mean Square Error) during training to penalize large errors heavily. However, for business reporting, I used <strong>MAPE</strong> (Mean Absolute Percentage Error) or <strong>WMAPE</strong>. Stakeholders find percentages (e.g., 'we are off by 5%') much easier to interpret than raw unit errors, which verified the <span class="metric">20% improvement</span> I reported."</p>
+                    <div class="formula">
+                        RMSE = √[(1/n) × Σ(Actual − Forecast)²]
+                    </div>
+                    <div class="formula">
+                        WMAPE = Σ|Actual − Forecast| / Σ|Actual| × 100%
+                    </div>
+                    <div>
+                        <span class="tag">RMSE</span>
+                        <span class="tag">MAPE</span>
+                        <span class="tag">WMAPE</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <footer>
+            <p>📈 Demand Forecasting with Machine Learning | Gradient Boosting Approach</p>
+        </footer>
+    </div>
+</body>
+</html>
