@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YIL-GPT Project Overview</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .header p {
+            font-size: 1.1em;
+            opacity: 0.95;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .section {
+            margin-bottom: 30px;
+            animation: fadeIn 0.6s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section-title {
+            font-size: 1.8em;
+            color: #667eea;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #667eea;
+            display: flex;
+            align-items: center;
+        }
+
+        .section-title .icon {
+            margin-right: 15px;
+            font-size: 1.2em;
+        }
+
+        .definition-box {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 25px;
+            border-radius: 15px;
+            border-left: 5px solid #667eea;
+            margin-bottom: 20px;
+            font-size: 1.1em;
+            line-height: 1.6;
+        }
+
+        .info-box {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            border-left: 4px solid #764ba2;
+        }
+
+        .info-box p {
+            line-height: 1.8;
+            margin-bottom: 10px;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            border-top: 4px solid #667eea;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        .feature-card h3 {
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 1.2em;
+        }
+
+        .pipeline {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .pipeline h3 {
+            color: #764ba2;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+
+        .pipeline-step {
+            background: #f8f9fa;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+            transition: background 0.3s;
+        }
+
+        .pipeline-step:hover {
+            background: #e9ecef;
+        }
+
+        .pipeline-step strong {
+            color: #667eea;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .result-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-weight: bold;
+            margin-top: 15px;
+        }
+
+        ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        ul li {
+            padding: 10px 0;
+            padding-left: 30px;
+            position: relative;
+            line-height: 1.6;
+        }
+
+        ul li:before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: #667eea;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+
+        .highlight {
+            background: linear-gradient(120deg, #ffeaa7 0%, #fdcb6e 100%);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8em;
+            }
+            
+            .content {
+                padding: 20px;
+            }
+            
+            .section-title {
+                font-size: 1.4em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🤖 YIL-GPT Project</h1>
+            <p>Retrieval-Augmented Generative AI for Industrial Expertise</p>
+        </div>
+
+        <div class="content">
+            <div class="section">
+                <div class="section-title">
+                    <span class="icon">📋</span>
+                    <span>What is YIL-GPT?</span>
+                </div>
+                <div class="definition-box">
+                    <strong>YIL-GPT</strong> is a Retrieval-Augmented Generative AI system designed to provide <span class="highlight">instant, source-verified industrial expertise</span> by combining internal proprietary knowledge with Large Language Models to safely reduce troubleshooting time in critical OT environments.
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="section-title">
+                    <span class="icon">🏗️</span>
+                    <span>Architecture Overview</span>
+                </div>
+                <div class="info-box">
+                    <p>YIL-GPT is an internal Generative AI assistant built using a <strong>Retrieval-Augmented Generation (RAG)</strong> architecture.</p>
+                    <p><strong>Instead of relying only on a Large Language Model's memory:</strong></p>
+                    <ul>
+                        <li>Retrieves relevant information from verified internal documents</li>
+                        <li>Then generates answers strictly grounded in that data</li>
+                    </ul>
+                    <div class="result-badge">
+                        👍 Result: No hallucinations, full source traceability
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="section-title">
+                    <span class="icon">⚙️</span>
+                    <span>How YIL-GPT Works</span>
+                </div>
+
+                <div class="pipeline">
+                    <h3>A. Offline Ingestion Pipeline (Knowledge Builder)</h3>
+                    <p style="margin-bottom: 15px; color: #666;"><em>WHY accuracy is ensured</em></p>
+                    
+                    <div class="pipeline-step">
+                        <strong>1. Data Collection</strong>
+                        Gathering internal documents and proprietary knowledge
+                    </div>
+                    
+                    <div class="pipeline-step">
+                        <strong>2. Pre-Processing</strong>
+                        Cleaning and preparing documents for analysis
+                    </div>
+                    
+                    <div class="pipeline-step">
+                        <strong>3. Text Chunking</strong>
+                        Breaking documents into manageable segments
+                    </div>
+                    
+                    <div class="pipeline-step">
+                        <strong>4. Embedding Creation</strong>
+                        Each chunk is converted into a numerical vector using a technical embedding model
+                    </div>
+                    
+                    <div class="pipeline-step">
+                        <strong>5. Vector Database Storage</strong>
+                        Storing vectors for fast semantic search
+                    </div>
+                    
+                    <div class="pipeline-step">
+                        <strong>6. MLOps & Automation</strong>
+                        Continuous monitoring and updating of the knowledge base
+                    </div>
+                </div>
+
+                <div class="pipeline">
+                    <h3>B. Online Inference Pipeline (Query Handler)</h3>
+                    <p style="margin-bottom: 15px; color: #666;"><em>HOW answers are generated</em></p>
+                    
+                    <div class="pipeline-step">
+                        <strong>1. Secure User Query</strong>
+                        User submits a question through secure interface
+                    </div>
+                    
+                    <div class="pipeline-step">
+                        <strong>2. Query Embedding</strong>
+                        Converting the query into vector format
+                    </div>
+                    
+                    <div class="pipeline-step">
+                        <strong>3. Context Retrieval (RAG Core)</strong>
+                        Finding the most relevant document chunks from the vector database
+                    </div>
+                    
+                    <div class="pipeline-step">
+                        <strong>4. Answer Generation</strong>
+                        LLM generates response using only retrieved context
+                    </div>
+                    
+                    <div class="pipeline-step">
+                        <strong>5. Source Citation</strong>
+                        Response includes references to source documents
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="section-title">
+                    <span class="icon">💻</span>
+                    <span>Technical Implementation</span>
+                </div>
+
+                <div class="pipeline">
+                    <h3>🔧 Ingestion Pipeline (ingestion.py)</h3>
+                    <p style="margin-bottom: 15px; color: #666;"><em>Implements the Offline Knowledge Builder</em></p>
+                    
+                    <div class="info-box">
+                        <ul>
+                            <li><strong>PDF Processing:</strong> Reads PDFs using PyMuPDF + pdfplumber for robust text extraction</li>
+                            <li><strong>Text Processing:</strong> Cleans and chunks text into manageable segments</li>
+                            <li><strong>Metadata Extraction:</strong> Extracts tags including equipment IDs, doc_type, and version information</li>
+                            <li><strong>Deduplication:</strong> Computes hashes for each chunk and avoids storing duplicate chunks</li>
+                            <li><strong>Embeddings:</strong> Generates vector embeddings using sentence-transformers</li>
+                            <li><strong>Storage:</strong> Stores vectors in Chroma vector database with rich metadata</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="pipeline">
+                    <h3>🔍 Online RAG System</h3>
+                    <p style="margin-bottom: 15px; color: #666;"><em>Implements the Online Query Handler</em></p>
+                    
+                    <div class="info-box">
+                        <p style="font-weight: 600; color: #764ba2; margin-bottom: 10px;">retrieval.py</p>
+                        <ul>
+                            <li>Embeds user queries into the same vector space</li>
+                            <li>Retrieves top-K most relevant chunks from Chroma DB</li>
+                            <li>Supports optional metadata filters for targeted search</li>
+                        </ul>
+
+                        <p style="font-weight: 600; color: #764ba2; margin-bottom: 10px; margin-top: 15px;">llm_client.py</p>
+                        <ul>
+                            <li>Builds context-aware prompts from retrieved chunks</li>
+                            <li>Manages LLM API calls with proper formatting</li>
+                            <li>Handles response parsing and error management</li>
+                        </ul>
+
+                        <p style="font-weight: 600; color: #764ba2; margin-bottom: 10px; margin-top: 15px;">api.py</p>
+                        <ul>
+                            <li>FastAPI-based REST API endpoints</li>
+                            <li>Orchestrates the complete query-response flow</li>
+                            <li>Returns answers with source metadata for full traceability</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <h3>📚 Libraries Used</h3>
+                        <p><strong>PyMuPDF & pdfplumber:</strong> PDF text extraction</p>
+                        <p><strong>sentence-transformers:</strong> Embedding generation</p>
+                        <p><strong>Chroma:</strong> Vector database</p>
+                        <p><strong>FastAPI:</strong> REST API framework</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>🎯 Key Features</h3>
+                        <p>✓ Hash-based deduplication</p>
+                        <p>✓ Metadata-driven filtering</p>
+                        <p>✓ Source traceability</p>
+                        <p>✓ Scalable architecture</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>🚀 Future Enhancements</h3>
+                        <p>• Metrics/evaluation module (Recall@K, latency)</p>
+                        <p>• CLI query interface</p>
+                        <p>• Django integration option</p>
+                        <p>• Advanced monitoring dashboard</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="section-title">
+                    <span class="icon">✨</span>
+                    <span>Popular Questions</span>
+                </div>
+
+                <div class="qa-section">
+                    <h2>How do you handle duplicacy in the RAG pipeline?</h2>
+                    <ol>
+                        <li>We use a combination of semantic similarity checks and metadata filtering to ensure that duplicate documents do not clutter the retrieval process. This helps maintain the quality and relevance of the information provided by YIL-GPT.</li>
+                        <li>Store metadata like document_id, version, timestamp</li>
+                        <li>Apply metadata filters (e.g., version = latest) to avoid pulling older duplicates</li>
+                    </ol>
+                </div>
+
+                <div class="qa-section">
+                    <h2>How do you measure accuracy and performance of the RAG system?</h2>
+                    <div class="qa-subsection">
+                        <p style="font-weight: 600; color: #764ba2; margin-bottom: 10px;">A. Retrieval Quality Metrics</p>
+                        <ol>
+                            <li><strong>Precision@K:</strong> Measures the proportion of relevant documents in the top K retrieved results</li>
+                            <li><strong>Recall@K:</strong> Assesses how many of the relevant documents are retrieved in the top K results</li>
+                            <li><strong>Mean Reciprocal Rank (MRR):</strong> Evaluates the rank position of the first relevant document</li>
+                        </ol>
+                    </div>
+
+                    <div class="qa-subsection">
+                        <p style="font-weight: 600; color: #764ba2; margin-bottom: 10px;">B. LLM Generation Quality Metrics</p>
+                        <ol>
+                            <li><strong>ROUGE Scores:</strong> Compare generated answers to reference answers based on overlapping n-grams, word sequences, and word pairs</li>
+                            <li><strong>BLEU Scores:</strong> Measure the quality of generated text by comparing it to reference texts</li>
+                            <li><strong>Human Evaluation:</strong> Involve domain experts to assess accuracy, relevance, and usefulness of generated answers</li>
+                        </ol>
+                    </div>
+
+                    <div class="qa-subsection">
+                        <p style="font-weight: 600; color: #764ba2; margin-bottom: 10px;">C. System Performance Metrics</p>
+                        <ol>
+                            <li><strong>Latency:</strong> Measure the time taken from query submission to answer generation</li>
+                            <li><strong>Throughput:</strong> Assess the number of queries the system can handle per unit time</li>
+                            <li><strong>Error Rate:</strong> Track the frequency of system errors or failures during query processing</li>
+                            <li><strong>Token Efficiency:</strong> Number of tokens used in the final prompt (reducing cost & time)</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <div class="qa-section">
+                    <h2>How do you handle tagging documents in the project?</h2>
+                    <ol>
+                        <li>We implement a multi-faceted tagging strategy that combines automated techniques with human oversight to ensure accurate and meaningful tags for our documents</li>
+                        <li><strong>Automated Tagging:</strong> Utilize Natural Language Processing (NLP) algorithms to analyze document content and automatically generate relevant tags based on keywords, topics, and entities</li>
+                        <li><strong>Human Review:</strong> Engage subject matter experts to review and refine automatically generated tags, ensuring they accurately reflect the document's content and context</li>
+                        <li><strong>Version Tagging:</strong> Version tags → Rev 1.2</li>
+                        <li><strong>Semantic Tagging:</strong> Apply semantic analysis to understand document meaning and relationships</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

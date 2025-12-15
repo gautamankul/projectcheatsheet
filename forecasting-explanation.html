@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demand Forecasting Optimization</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .header p {
+            font-size: 1.1em;
+            opacity: 0.95;
+        }
+
+        .question-box {
+            background: #f8f9fa;
+            border-left: 5px solid #667eea;
+            padding: 25px;
+            margin: 30px;
+            border-radius: 8px;
+        }
+
+        .question-box h2 {
+            color: #667eea;
+            margin-bottom: 15px;
+        }
+
+        .testing-points {
+            background: #fff3cd;
+            border-left: 5px solid #ffc107;
+            padding: 20px;
+            margin: 20px 30px;
+            border-radius: 8px;
+        }
+
+        .testing-points h3 {
+            color: #856404;
+            margin-bottom: 10px;
+        }
+
+        .testing-points ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .testing-points li {
+            padding: 5px 0;
+            padding-left: 25px;
+            position: relative;
+        }
+
+        .testing-points li:before {
+            content: "▸";
+            position: absolute;
+            left: 0;
+            color: #ffc107;
+            font-weight: bold;
+        }
+
+        .answer-section {
+            padding: 0 30px 30px 30px;
+        }
+
+        .perfect-answer {
+            background: #d4edda;
+            border-left: 5px solid #28a745;
+            padding: 25px;
+            margin-bottom: 30px;
+            border-radius: 8px;
+        }
+
+        .perfect-answer h2 {
+            color: #155724;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .strategy-card {
+            background: white;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 25px;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        .strategy-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.2);
+            border-color: #667eea;
+        }
+
+        .strategy-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .strategy-number {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2em;
+            flex-shrink: 0;
+        }
+
+        .strategy-title {
+            color: #2c3e50;
+            font-size: 1.4em;
+            font-weight: 600;
+        }
+
+        .impact-badge {
+            background: #28a745;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.75em;
+            margin-left: auto;
+        }
+
+        .strategy-content {
+            color: #495057;
+            margin-left: 60px;
+        }
+
+        .strategy-content h4 {
+            color: #667eea;
+            margin: 15px 0 10px 0;
+        }
+
+        .strategy-content ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .strategy-content li {
+            padding: 8px 0;
+            padding-left: 25px;
+            position: relative;
+        }
+
+        .strategy-content li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #28a745;
+            font-weight: bold;
+        }
+
+        .highlight-box {
+            background: #e7f3ff;
+            border-left: 4px solid #2196F3;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+        }
+
+        .highlight-box strong {
+            color: #1976D2;
+        }
+
+        .summary-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            margin: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .summary-box h2 {
+            margin-bottom: 20px;
+            font-size: 1.8em;
+        }
+
+        .summary-box p {
+            font-size: 1.1em;
+            line-height: 1.8;
+        }
+
+        .code-snippet {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 15px;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            overflow-x: auto;
+            margin: 10px 0;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8em;
+            }
+            
+            .strategy-content {
+                margin-left: 0;
+            }
+            
+            .strategy-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎯 Demand Forecasting Optimization</h1>
+            <p>How to Achieve 30%+ Accuracy Improvement</p>
+        </div>
+
+        <div class="question-box">
+            <h2>"In demand forecasting, how did you optimize accuracy by 30%? What are the ways to achieve that?"</h2>
+        </div>
+
+        <div class="testing-points">
+            <h3>This question is testing:</h3>
+            <ul>
+                <li>Your understanding of time-series model tuning</li>
+                <li>Your ability to improve pipeline and data quality</li>
+                <li>Your capability to think like a data scientist who owns the full workflow</li>
+            </ul>
+        </div>
+
+        <div class="answer-section">
+            <div class="perfect-answer">
+                <h2>✅ Perfect Interview Answer</h2>
+                <p>"In my demand forecasting project, I improved accuracy by around 30–75% through a combination of data, feature, and model optimization techniques. Here are the key ways I optimized performance:"</p>
+            </div>
+
+            <div class="strategy-card">
+                <div class="strategy-header">
+                    <div class="strategy-number">1</div>
+                    <div class="strategy-title">Data-Level Improvements</div>
+                    <span class="impact-badge">Most Impactful</span>
+                </div>
+                <div class="strategy-content">
+                    <h4>Cleaning outliers</h4>
+                    <p>Many demand series have:</p>
+                    <ul>
+                        <li>Stockouts</li>
+                        <li>Supply chain delays</li>
+                        <li>Holiday spikes</li>
+                        <li>Machinery shutdowns</li>
+                    </ul>
+                    <p>These distort the trend. So I:</p>
+                    <ul>
+                        <li>Replaced extreme points using IQR/MAD smoothing</li>
+                        <li>Used seasonal decomposition to isolate anomalies</li>
+                        <li>Applied rolling median filters</li>
+                    </ul>
+                    <div class="highlight-box">
+                        <strong>This alone increased stability of the forecast.</strong>
+                    </div>
+                </div>
+            </div>
+
+            <div class="strategy-card">
+                <div class="strategy-header">
+                    <div class="strategy-number">2</div>
+                    <div class="strategy-title">Feature Engineering</div>
+                    <span class="impact-badge">Huge Boost</span>
+                </div>
+                <div class="strategy-content">
+                    <p><strong>Most candidates forget this — but it's the real reason accuracy jumps.</strong></p>
+                    <h4>I added:</h4>
+                    <ul>
+                        <li>Lag features → lag1, lag7, lag14, lag28</li>
+                        <li>Rolling window features → rolling mean/median for 7, 15, 30 days</li>
+                        <li>Seasonality indicators → month, week, day of week, holiday flags</li>
+                        <li>Promotional/price features → if available</li>
+                        <li>Weather features (if relevant to demand)</li>
+                    </ul>
+                    <div class="highlight-box">
+                        <strong>Why this improves accuracy:</strong> Models like XGBoost / LightGBM understand relationships better when windows and lags are present.
+                    </div>
+                </div>
+            </div>
+
+            <div class="strategy-card">
+                <div class="strategy-header">
+                    <div class="strategy-number">3</div>
+                    <div class="strategy-title">Model Optimization</div>
+                </div>
+                <div class="strategy-content">
+                    <h4>Switching from baseline to better models</h4>
+                    <p>I experimented with:</p>
+                    <ul>
+                        <li>ARIMA / SARIMA</li>
+                        <li>Facebook Prophet</li>
+                        <li>Gradient Boosting Models → XGBoost, LightGBM</li>
+                        <li>LSTM / BiLSTM for sequence patterns</li>
+                    </ul>
+                    <div class="highlight-box">
+                        <strong>XGBoost + rolling features gave the best improvement (~30–35%).</strong>
+                    </div>
+                </div>
+            </div>
+
+            <div class="strategy-card">
+                <div class="strategy-header">
+                    <div class="strategy-number">4</div>
+                    <div class="strategy-title">Hyperparameter Tuning</div>
+                </div>
+                <div class="strategy-content">
+                    <p>I used:</p>
+                    <ul>
+                        <li>Grid Search</li>
+                        <li>Random Search</li>
+                        <li>Bayesian Optimization (Optuna)</li>
+                    </ul>
+                    <h4>For example in XGBoost:</h4>
+                    <ul>
+                        <li>Tuned <code>eta</code>, <code>max_depth</code>, <code>subsample</code>, <code>colsample_bytree</code>, <code>n_estimators</code></li>
+                        <li>Tuned early stopping to avoid overfit</li>
+                    </ul>
+                    <div class="highlight-box">
+                        <strong>This typically added another 5–10% accuracy gain.</strong>
+                    </div>
+                </div>
+            </div>
+
+            <div class="strategy-card">
+                <div class="strategy-header">
+                    <div class="strategy-number">5</div>
+                    <div class="strategy-title">Cross-Validation for Time-Series</div>
+                </div>
+                <div class="strategy-content">
+                    <p>Instead of normal K-fold, I used:</p>
+                    <div class="highlight-box">
+                        <strong>TimeSeriesSplit</strong> (rolling cross-validation)
+                    </div>
+                    <p>This ensures the model generalizes well to unseen future periods. It prevented leakage and improved stability.</p>
+                </div>
+            </div>
+
+            <div class="strategy-card">
+                <div class="strategy-header">
+                    <div class="strategy-number">6</div>
+                    <div class="strategy-title">Data Frequency & Aggregation</div>
+                </div>
+                <div class="strategy-content">
+                    <p>Sometimes:</p>
+                    <ul>
+                        <li>Daily data is too noisy</li>
+                        <li>Weekly data is more predictable</li>
+                    </ul>
+                    <h4>I evaluated forecasts at:</h4>
+                    <ul>
+                        <li>Daily</li>
+                        <li>Weekly</li>
+                        <li>7-day aggregated</li>
+                    </ul>
+                    <div class="highlight-box">
+                        <strong>Switching the frequency gave a surprisingly large accuracy boost.</strong>
+                    </div>
+                </div>
+            </div>
+
+            <div class="strategy-card">
+                <div class="strategy-header">
+                    <div class="strategy-number">7</div>
+                    <div class="strategy-title">Automating EDA & Pipeline</div>
+                </div>
+                <div class="strategy-content">
+                    <p>As mentioned in your resume:</p>
+                    <ul>
+                        <li>Automated EDA → standardized anomaly removal</li>
+                        <li>Automated feature generation</li>
+                        <li>Automated hyperparameter tuning</li>
+                        <li>Automated retraining triggers</li>
+                    </ul>
+                    <div class="highlight-box">
+                        <strong>This reduced manual errors and improved consistency.</strong>
+                    </div>
+                </div>
+            </div>
+
+            <div class="strategy-card">
+                <div class="strategy-header">
+                    <div class="strategy-number">8</div>
+                    <div class="strategy-title">Domain-Specific Adjustments</div>
+                </div>
+                <div class="strategy-content">
+                    <p>Every industry has unique demand drivers. I added:</p>
+                    <ul>
+                        <li>Seasonal spikes (holidays, festivals)</li>
+                        <li>Quarter-end spikes</li>
+                        <li>Production line downtime</li>
+                        <li>Marketing events</li>
+                    </ul>
+                    <div class="highlight-box">
+                        <strong>These improved model realism.</strong>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="summary-box">
+            <h2>🎯 Short, Crisp Summary for Interview</h2>
+            <p>"I optimized demand forecasting accuracy by focusing on improving data quality, engineering meaningful time-series features, switching to better ML models like XGBoost/LightGBM, and running hyperparameter tuning with rolling cross-validation.</p>
+            <p style="margin-top: 15px;">Additional gains came from outlier treatment, holiday effects, frequency optimization, and automating the entire EDA + training pipeline.</p>
+            <p style="margin-top: 15px;"><strong>These combined improvements led to around 30%+ uplift in accuracy."</strong></p>
+        </div>
+    </div>
+</body>
+</html>
