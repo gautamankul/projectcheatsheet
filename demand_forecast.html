@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,7 +11,7 @@
             padding: 0;
             box-sizing: border-box;
         }
-        
+
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -18,7 +19,7 @@
             line-height: 1.6;
             color: #333;
         }
-        
+
         .container {
             max-width: 900px;
             margin: 0 auto;
@@ -27,29 +28,29 @@
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
             overflow: hidden;
         }
-        
+
         header {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
             padding: 40px;
             text-align: center;
         }
-        
+
         h1 {
             font-size: 2.5em;
             margin-bottom: 10px;
             font-weight: 700;
         }
-        
+
         .subtitle {
             font-size: 1.1em;
             opacity: 0.9;
         }
-        
+
         .content {
             padding: 40px;
         }
-        
+
         .qa-item {
             margin-bottom: 40px;
             padding: 30px;
@@ -58,12 +59,12 @@
             border-left: 5px solid #667eea;
             transition: transform 0.2s, box-shadow 0.2s;
         }
-        
+
         .qa-item:hover {
             transform: translateY(-2px);
             box-shadow: 0 8px 20px rgba(102, 126, 234, 0.2);
         }
-        
+
         .question {
             font-size: 1.3em;
             font-weight: 600;
@@ -72,7 +73,7 @@
             display: flex;
             align-items: flex-start;
         }
-        
+
         .q-number {
             background: #667eea;
             color: white;
@@ -82,29 +83,34 @@
             font-size: 0.9em;
             flex-shrink: 0;
         }
-        
+
         .answer {
             color: #495057;
             line-height: 1.8;
             font-size: 1.05em;
         }
-        
+
         .answer p {
             margin-bottom: 15px;
         }
-        
+
         .highlight {
             background: #fff3cd;
             padding: 2px 6px;
             border-radius: 3px;
             font-weight: 500;
         }
-        
+
         .metric {
             color: #28a745;
             font-weight: 600;
         }
-        
+
+        .challenge {
+            color: #dc3545;
+            font-weight: 600;
+        }
+
         pre {
             background: #2d3748;
             color: #e2e8f0;
@@ -116,21 +122,21 @@
             font-size: 0.95em;
             line-height: 1.5;
         }
-        
+
         code {
             font-family: 'Courier New', monospace;
         }
-        
+
         .feature-list {
             margin: 15px 0;
             padding-left: 20px;
         }
-        
+
         .feature-list li {
             margin: 8px 0;
             color: #495057;
         }
-        
+
         .formula {
             background: #e7f3ff;
             border: 2px solid #90c9ff;
@@ -142,7 +148,7 @@
             font-size: 1.1em;
             color: #004085;
         }
-        
+
         .tag {
             display: inline-block;
             background: #764ba2;
@@ -152,7 +158,19 @@
             font-size: 0.85em;
             margin: 5px 5px 5px 0;
         }
-        
+
+        .solution-box {
+            background: #d4edda;
+            border-left: 4px solid #28a745;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 6px;
+        }
+
+        .solution-box strong {
+            color: #155724;
+        }
+
         footer {
             background: #f8f9fa;
             padding: 20px;
@@ -162,13 +180,14 @@
         }
     </style>
 </head>
+
 <body>
     <div class="container">
         <header>
             <h1>📊 Demand Forecast Q&A</h1>
             <p class="subtitle">Machine Learning Approach to Sales Forecasting</p>
         </header>
-        
+
         <div class="content">
             <div class="qa-item">
                 <div class="question">
@@ -176,8 +195,12 @@
                     <span>Why did you choose Gradient Boosting over ARIMA/Prophet?</span>
                 </div>
                 <div class="answer">
-                    <p>While ARIMA and Prophet are excellent for univariate time-series, I chose <span class="highlight">Gradient Boosting</span> (e.g., XGBoost or LightGBM) because this project required handling <strong>multiple external variables</strong> like price changes and promotions.</p>
-                    <p>Gradient Boosting models are <strong>non-linear</strong> and more robust at capturing complex interactions between these features compared to the linear assumptions of ARIMA.</p>
+                    <p>While ARIMA and Prophet are excellent for univariate time-series, I chose <span
+                            class="highlight">Gradient Boosting</span> (e.g., XGBoost or LightGBM) because this project
+                        required handling <strong>multiple external variables</strong> like price changes and
+                        promotions.</p>
+                    <p>Gradient Boosting models are <strong>non-linear</strong> and more robust at capturing complex
+                        interactions between these features compared to the linear assumptions of ARIMA.</p>
                     <div>
                         <span class="tag">XGBoost</span>
                         <span class="tag">LightGBM</span>
@@ -185,33 +208,41 @@
                     </div>
                 </div>
             </div>
-            
+
             <div class="qa-item">
                 <div class="question">
                     <span class="q-number">Q2</span>
                     <span>What specific features did you incorporate to improve accuracy?</span>
                 </div>
                 <div class="answer">
-                    <p>I engineered several features to achieve the <span class="metric">20% accuracy improvement</span>:</p>
+                    <p>I engineered several features to achieve the <span class="metric">20% accuracy
+                            improvement</span>:</p>
                     <ul class="feature-list">
-                        <li><strong>Lag Features:</strong> Previous sales at <em>t−1</em>, <em>t−7</em>, and <em>t−30</em> days</li>
-                        <li><strong>Rolling Statistics:</strong> Moving averages and standard deviations to capture trends</li>
+                        <li><strong>Lag Features:</strong> Previous sales at <em>t−1</em>, <em>t−7</em>, and
+                            <em>t−30</em> days
+                        </li>
+                        <li><strong>Rolling Statistics:</strong> Moving averages and standard deviations to capture
+                            trends</li>
                         <li><strong>Temporal Data:</strong> Indicators for weekends, holidays, and month-end spikes</li>
                     </ul>
                     <div class="formula">
-                        Sales<sub>t</sub> = f(Sales<sub>t−1</sub>, Sales<sub>t−7</sub>, Sales<sub>t−30</sub>, Moving Avg, Temporal Features)
+                        Sales<sub>t</sub> = f(Sales<sub>t−1</sub>, Sales<sub>t−7</sub>, Sales<sub>t−30</sub>, Moving
+                        Avg, Temporal Features)
                     </div>
                 </div>
             </div>
-            
+
             <div class="qa-item">
                 <div class="question">
                     <span class="q-number">Q3</span>
                     <span>How did you validate the model for production?</span>
                 </div>
                 <div class="answer">
-                    <p>I used <span class="highlight">Time-Series Cross-Validation</span> (walk-forward validation) to ensure the model didn't 'leak' future information into the past.</p>
-                    <p>The primary metric was <strong>MAPE</strong> (Mean Absolute Percentage Error), as it was easily interpretable for business stakeholders when discussing the <span class="metric">75% improvement</span> in overall forecast accuracy.</p>
+                    <p>I used <span class="highlight">Time-Series Cross-Validation</span> (walk-forward validation) to
+                        ensure the model didn't 'leak' future information into the past.</p>
+                    <p>The primary metric was <strong>MAPE</strong> (Mean Absolute Percentage Error), as it was easily
+                        interpretable for business stakeholders when discussing the <span class="metric">75%
+                            improvement</span> in overall forecast accuracy.</p>
                     <div class="formula">
                         MAPE = (1/n) × Σ |Actual − Forecast| / |Actual| × 100%
                     </div>
@@ -221,15 +252,19 @@
                     </div>
                 </div>
             </div>
-            
+
             <div class="qa-item">
                 <div class="question">
                     <span class="q-number">Q4</span>
                     <span>What feature engineering techniques did you use?</span>
                 </div>
                 <div class="answer">
-                    <p>"Since seasonality was a major factor, I created <strong>time-based features</strong> like day-of-week, month, and 'is_holiday' flags. Crucially, I engineered <strong>lag features</strong> (e.g., sales 7 days ago, sales 30 days ago) and <strong>rolling window statistics</strong> (e.g., moving average of the last 7 days) to capture trends. These lag features were the strongest predictors in the model."</p>
-<pre><code># Example Feature Engineering
+                    <p>Since seasonality was a major factor, I created <strong>time-based features</strong> like
+                        day-of-week, month, and 'is_holiday' flags. Crucially, I engineered <strong>lag
+                            features</strong> (e.g., sales 7 days ago, sales 30 days ago) and <strong>rolling window
+                            statistics</strong> (e.g., moving average of the last 7 days) to capture trends. These lag
+                        features were the strongest predictors in the model.</p>
+                    <pre><code># Example Feature Engineering
 df['sales_lag_7'] = df['sales'].shift(7)
 df['sales_lag_30'] = df['sales'].shift(30)
 df['rolling_mean_7'] = df['sales'].rolling(window=7).mean()
@@ -237,16 +272,20 @@ df['is_weekend'] = df['day_of_week'].isin([5, 6]).astype(int)
 df['is_holiday'] = df['date'].isin(holiday_dates).astype(int)</code></pre>
                 </div>
             </div>
-            
+
             <div class="qa-item">
                 <div class="question">
                     <span class="q-number">Q5</span>
                     <span>How did you handle missing values or 'Cold Start' problems?</span>
                 </div>
                 <div class="answer">
-                    <p><strong>Missing Values:</strong> For minor gaps in historical sales, I used <span class="highlight">linear interpolation</span>.</p>
-                    <p><strong>Cold Start Products:</strong> For new items with no history, I used a <span class="highlight">clustering approach</span>: I assigned the new product to an existing product category based on meta-features (price, type) and used the category's average sales curve as a proxy until sufficient actual data was generated.</p>
-<pre><code># Handling Missing Values
+                    <p><strong>Missing Values:</strong> For minor gaps in historical sales, I used <span
+                            class="highlight">linear interpolation</span>.</p>
+                    <p><strong>Cold Start Products:</strong> For new items with no history, I used a <span
+                            class="highlight">clustering approach</span>: I assigned the new product to an existing
+                        product category based on meta-features (price, type) and used the category's average sales
+                        curve as a proxy until sufficient actual data was generated.</p>
+                    <pre><code># Handling Missing Values
 df['sales'].interpolate(method='linear', inplace=True)
 
 # Cold Start - Clustering Approach
@@ -254,14 +293,18 @@ new_product_cluster = assign_cluster(new_product_features)
 proxy_sales = category_avg_sales[new_product_cluster]</code></pre>
                 </div>
             </div>
-            
+
             <div class="qa-item">
                 <div class="question">
                     <span class="q-number">Q6</span>
                     <span>Which metric did you use to define 'accuracy' and why?</span>
                 </div>
                 <div class="answer">
-                    <p>"I primarily optimized for <strong>RMSE</strong> (Root Mean Square Error) during training to penalize large errors heavily. However, for business reporting, I used <strong>MAPE</strong> (Mean Absolute Percentage Error) or <strong>WMAPE</strong>. Stakeholders find percentages (e.g., 'we are off by 5%') much easier to interpret than raw unit errors, which verified the <span class="metric">20% improvement</span> I reported."</p>
+                    <p>I primarily optimized for <strong>RMSE</strong> (Root Mean Square Error) during training to
+                        penalize large errors heavily. However, for business reporting, I used <strong>MAPE</strong>
+                        (Mean Absolute Percentage Error) or <strong>WMAPE</strong>. Stakeholders find percentages (e.g.,
+                        'we are off by 5%') much easier to interpret than raw unit errors, which verified the <span
+                            class="metric">20% improvement</span> I reported.</p>
                     <div class="formula">
                         RMSE = √[(1/n) × Σ(Actual − Forecast)²]
                     </div>
@@ -275,11 +318,112 @@ proxy_sales = category_avg_sales[new_product_cluster]</code></pre>
                     </div>
                 </div>
             </div>
+
+            <div class="qa-item">
+                <div class="question">
+                    <span class="q-number">Q7</span>
+                    <span>What difficulties did you face in the project and how did you resolve them?</span>
+                </div>
+                <div class="answer">
+                    <p>I encountered several <span class="challenge">key challenges</span> during the demand forecasting
+                        project:</p>
+
+                    <p><strong>1. Data Leakage in Time-Series:</strong></p>
+                    <div class="solution-box">
+                        <strong>Challenge:</strong> Initially, my model showed exceptional performance during training
+                        but failed miserably in production. I realized I had data leakage—using future information in my
+                        features.<br><br>
+                        <strong>Resolution:</strong> I implemented strict <span class="highlight">time-series
+                            cross-validation</span> with walk-forward validation and ensured all lag features and
+                        rolling statistics only used past data. I also created a time-based train-test split instead of
+                        random splitting.
+                    </div>
+
+                    <pre><code># Proper Time-Series Split
+from sklearn.model_selection import TimeSeriesSplit
+
+tscv = TimeSeriesSplit(n_splits=5)
+for train_idx, test_idx in tscv.split(X):
+    X_train, X_test = X[train_idx], X[test_idx]
+    y_train, y_test = y[train_idx], y[test_idx]</code></pre>
+
+                    <p><strong>2. Handling Outliers and Promotional Spikes:</strong></p>
+                    <div class="solution-box">
+                        <strong>Challenge:</strong> Promotional campaigns caused sudden sales spikes that the model
+                        misinterpreted as normal patterns, leading to poor forecasts.<br><br>
+                        <strong>Resolution:</strong> I created a dedicated <span class="highlight">promotion flag
+                            feature</span> and used <span class="highlight">IQR-based outlier detection</span> to
+                        identify and treat extreme values. I also trained separate models for promotional vs.
+                        non-promotional periods.
+                    </div>
+
+                    <pre><code># Outlier Treatment
+Q1 = df['sales'].quantile(0.25)
+Q3 = df['sales'].quantile(0.75)
+IQR = Q3 - Q1
+outliers = (df['sales'] < Q1 - 1.5*IQR) | (df['sales'] > Q3 + 1.5*IQR)
+
+# Cap outliers instead of removing
+df['sales_capped'] = df['sales'].clip(lower=Q1-1.5*IQR, upper=Q3+1.5*IQR)</code></pre>
+
+                    <p><strong>3. Model Drift and Retraining:</strong></p>
+                    <div class="solution-box">
+                        <strong>Challenge:</strong> After 3 months in production, model accuracy degraded from 75% to
+                        65% due to changing market conditions and seasonal shifts.<br><br>
+                        <strong>Resolution:</strong> I set up an <span class="highlight">automated retraining
+                            pipeline</span> that triggered weekly model updates using the latest data. I also
+                        implemented <span class="highlight">monitoring dashboards</span> to track MAPE drift and alert
+                        when performance dropped below threshold.
+                    </div>
+
+                    <p><strong>4. Computational Performance:</strong></p>
+                    <div class="solution-box">
+                        <strong>Challenge:</strong> With 50+ products and 3 years of daily data, model training took
+                        over 4 hours, making iterations slow.<br><br>
+                        <strong>Resolution:</strong> I switched from XGBoost to <span class="highlight">LightGBM</span>
+                        which reduced training time by 60%. I also implemented <span class="highlight">feature
+                            selection</span> using correlation analysis and feature importance, reducing features from
+                        80 to 35 key predictors without losing accuracy.
+                    </div>
+
+                    <pre><code>
+                        # LightGBM for faster training
+                        import lightgbm as lgb
+
+                        params = {
+                            'objective': 'regression',
+                            'metric': 'rmse',
+                            'boosting_type': 'gbdt',
+                            'num_leaves': 31,
+                            'learning_rate': 0.05,
+                            'feature_fraction': 0.8
+                        }
+
+                        model = lgb.train(params, train_data, num_boost_round=1000)
+                    </code></pre>
+
+                    <p>These challenges taught me the importance of <strong>rigorous validation</strong>,
+                        <strong>continuous monitoring</strong>, and <strong>iterative improvement</strong> in production
+                        ML systems.
+                        <p style="color: #dc3545;">
+                            The biggest challenges were handling seasonality, missing data, and cold-start products. I solved this using lag and rolling features, calendar indicators, interpolation for missing values, and clustering-based proxies for new products. I also avoided data leakage by using walk-forward validation and reported MAPE/WMAPE so stakeholders could easily understand the impact
+                        </p>
+                    </p>
+
+                    <div>
+                        <span class="tag">Time-Series Validation</span>
+                        <span class="tag">Outlier Detection</span>
+                        <span class="tag">Model Monitoring</span>
+                        <span class="tag">Performance Optimization</span>
+                    </div>
+                </div>
+            </div>
         </div>
-        
+
         <footer>
             <p>📈 Demand Forecasting with Machine Learning | Gradient Boosting Approach</p>
         </footer>
     </div>
 </body>
+
 </html>
